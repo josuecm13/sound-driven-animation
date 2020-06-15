@@ -30,12 +30,30 @@ SONIDO DEL CARRO:
 SynthDef(\carro,{
 	var engine, brake, horns, envHorn, tmjmp = 0.1, tmshort = 0.54, output;
 	envHorn = Env.new([0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0],
-		[2,tmjmp,2.19,tmjmp,0.9,tmjmp,tmshort,tmjmp,tmshort,tmjmp,tmshort,tmjmp,tmshort,tmjmp,tmshort,tmjmp,tmshort,tmjmp,2.19,tmpshort]);
-	horns = ~horn.value(500,1,EnvGen.ar(envHorn,doneAction:0));
+		[2,tmjmp,2.19,tmjmp,0.9,tmjmp,tmshort,tmjmp,tmshort,tmjmp,tmshort,tmjmp,tmshort,tmjmp,tmshort,tmjmp,tmshort,tmjmp,2.19,tmshort]);
+	horns = ~horn.value(500,1,EnvGen.ar(envHorn,doneAction:2));
 	engine = ~engine.value(12,2);
 	output = Mix.ar([horns,engine]);
 	Out.ar(0,Pan2.ar(output));
 }).add;
+
+~car = {
+	var engine, brake, horns, envHorn, tmjmp = 0.1, tmshort = 0.54, output;
+	envHorn = Env.new([0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0],
+		[2,tmjmp,2.19,tmjmp,0.9,tmjmp,tmshort,tmjmp,tmshort,tmjmp,tmshort,tmjmp,tmshort,tmjmp,tmshort,tmjmp,tmshort,tmjmp,2.19,tmshort]);
+	horns = ~horn.value(500,1,EnvGen.ar(envHorn,doneAction:2));
+	engine = ~engine.value(12,2);
+	output = Mix.ar([horns,engine]);
+	Out.ar(0,Pan2.ar(output));
+};
+
+(
+   var file = SoundFile.new;
+   file.headerFormat_("AIFF").sampleFormat_("int16").numChannels_(1);
+   file.openWrite("C:\\Dev\\Sintesis\\test1.aiff");
+   file.writeData(r);
+   file.close;
+)
 
 
 Synth(\carro);
