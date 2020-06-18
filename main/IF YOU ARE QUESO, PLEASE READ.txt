@@ -1,0 +1,5 @@
+* Extraer el archivo themidibus-latest.zip aquí.
+* Abrir Processing.
+* Ir a Files -> Preferences
+* Copiar ubicación del sketchbook
+* Copiar la carpeta themidibus a la carpeta libraries
