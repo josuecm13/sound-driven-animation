@@ -14,22 +14,23 @@ class Patricio{
     this.direction = -1; 
     this.framecount= 0;
     this.tMessage = 1;
-    initStar(xPos, yPos, 50, 100, arms);
+    this.angle = 0.17;
+    starv2();
   }
   
-  void initStar(float x, float y, float radius1, float radius2, int npoints) {
-    float angle = (TWO_PI / npoints);
-    float halfAngle = angle/2.0;
+  void starv2(){
     shape = createShape();
     shape.beginShape();
-    for (float a = 0; a < TWO_PI; a += angle) {
-      float sx = x + cos(a) * radius2;
-      float sy = y + sin(a) * radius2;
-      shape.vertex(sx, sy);
-      sx = x + cos(a+halfAngle) * radius1;
-      sy = y + sin(a+halfAngle) * radius1;
-      shape.vertex(sx, sy);
-    }
+    shape.vertex(0, -50);
+    shape.vertex(14, -20);
+    shape.vertex(47, -15);
+    shape.vertex(23, 7);
+    shape.vertex(29, 40);
+    shape.vertex(0, 25);
+    shape.vertex(-29, 40);
+    shape.vertex(-23, 7);
+    shape.vertex(-47, -15);
+    shape.vertex(-14, -20);
     shape.endShape();
     shape.setStroke(color(252-50, 136-50, 112-50));
     shape.setFill(color(252, 136, 112));
@@ -51,20 +52,19 @@ class Patricio{
   }
     
   void update(){
-    float rotationAngle = 0;
     if(isMoving){
       if(xPos > 0){
         xPos += direction*velocity;
       }else{
+        stop();
         triggerMessage(tMessage);
       }
-      //rotationAngle = 0.11;
+      if(framecount%5 == 0){
+        angle *= -1;
+        shape.rotate(angle);
+      }
     }
-    if(framecount%5 == 0){
-      rotationAngle *= -1;
-    }
-    shape.rotate(rotationAngle);
-    shape(shape,xPos,yPos*0.5);
+    shape(shape,xPos,yPos);
     framecount++;
     framecount %= 30;
   }
