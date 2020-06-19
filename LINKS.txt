@@ -1,1 +1,2 @@
 (supercollider) MIDIout: https://doc.sccode.org/Classes/MIDIOut.html
+(scd & processing): https://discourse.processing.org/t/processing-3-supercollider-interaction/10432

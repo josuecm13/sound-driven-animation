@@ -1,6 +1,6 @@
-class Bob{
+class Bob implements HittableByCar{
   int  arms, direction, framecount;
-  float xPos, yPos, angle, velocity;
+  float xPos, yPos, angle, velocity, xLimit;
   Boolean isMoving; 
   PShape shape;
   private int tMessage;
@@ -10,7 +10,7 @@ class Bob{
     this.yPos = y;
     this.isMoving = false;
     this.velocity = 4;
-    this.direction = -1; 
+    this.direction = 1; 
     this.framecount= 0;
     this.tMessage = 1;
     this.angle = 0.17;
@@ -30,10 +30,16 @@ class Bob{
   }
 
   void move(){
+    this.velocity = 4;
     this.isMoving = true;
   }
   
+  void setLimit(float limit){
+    this.xLimit = limit;
+  }
+  
   void stop(){
+    xPos = - 60;
     this.isMoving = false;
   }
   
@@ -46,10 +52,11 @@ class Bob{
     
   void update(){
     if(isMoving){
-      if(xPos > 0){
+      if(xPos < xLimit){
         xPos += direction*velocity;
+      }else if(xPos >= xLimit && xPos < height){
+        velocity = 0;
       }else{
-        xPos = width;
         stop();
         triggerMessage(tMessage);
       }
@@ -63,4 +70,5 @@ class Bob{
     framecount %= 30;
   }
   
+
 }

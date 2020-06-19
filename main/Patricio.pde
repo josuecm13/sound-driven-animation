@@ -1,6 +1,6 @@
-class Patricio{
+class Patricio implements HittableByCar{
   int  arms, direction, framecount;
-  float xPos, yPos, angle, velocity;
+  float xPos, yPos, angle, velocity, xLimit;
   Boolean isMoving; 
   PShape shape;
   private int tMessage;
@@ -37,10 +37,12 @@ class Patricio{
   }
   
   void move(){
+    this.velocity = 4;
     this.isMoving = true;
   }
   
   void stop(){
+    this.xPos = width + 50;
     this.isMoving = false;
   }
   
@@ -50,11 +52,17 @@ class Patricio{
       tMessage--;
     }
   }
+  
+  void setLimit(float limit){
+    this.xLimit = limit;
+  }
     
   void update(){
     if(isMoving){
-      if(xPos > 0){
+      if(xPos > xLimit){
         xPos += direction*velocity;
+      }else if(xPos <= xLimit && xPos > 0){
+        velocity = 0;
       }else{
         stop();
         triggerMessage(tMessage);
