@@ -6,7 +6,7 @@ void setup(){
   size(736,476, P2D);
   bg = loadImage("background.jpg");
   patrick = new Patricio(width,height*3/4 ,5);
-  bob = new Bob(width/2,height/2,5);
+  bob = new Bob(width,height*3/4);
   //frameRate(27);
 }
 
@@ -15,6 +15,9 @@ void draw(){
   if(keyPressed){
     if(key == 'b' || key == 'b'){
       animation1();
+    }
+    if(key == 'p' || key == 'P'){
+      animation2();
     }
     if(key == 'p' || key == 'P'){
       animation2();
