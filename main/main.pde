@@ -5,11 +5,10 @@ PImage bg;
 void setup(){
   size(736,476, P2D);
   bg = loadImage("background.jpg");
-  patrick = new Patricio(width/2,height/2,5);
+  patrick = new Patricio(width,height*3/4 ,5);
   bob = new Bob(width/2,height/2,5);
   //frameRate(27);
 }
-
 
 void draw(){
   image(bg,0,0);
