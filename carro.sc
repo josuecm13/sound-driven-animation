@@ -5,15 +5,15 @@ SONIDO DEL CARRO:
 */
 
 (
-
 ~horn = {
 	arg frequency, mul = 0.5, env;
 	Mix.ar([LFSaw.ar(frequency, mul: mul),LFSaw.ar(frequency - 70 - 20.rand,  mul: mul)]) * env
 };
 
 ~hit = {
-	arg waitingTime;
-	var env = Env.new([],[]);
+	arg waitingTime = 4, releaseTime = 0.9;
+	var env = Env.new([0,0,45,0],[waitingTime, 0.2, releaseTime], \sin);
+	WhiteNoise.kr(EnvGen.ar(env, doneAction:2))
 };
 
 ~engine = {
@@ -32,12 +32,13 @@ SONIDO DEL CARRO:
 
 SynthDef(\carro,{
 	arg tmjmp = 0.1, tmshort = 0.54, tmhold = 1.3, wtm = 2;
-	var engine, brake, horns, envHorn, output;
+	var engine, brake, horns, envHorn, output, crash;
 	envHorn = Env.new([0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0],
 		[wtm,tmjmp,tmhold,tmjmp,tmhold * 0.5,tmjmp,tmshort,tmjmp,tmshort,tmjmp,tmshort,tmjmp,tmshort,tmjmp,tmshort,tmjmp,tmshort,tmjmp,tmhold,tmshort]);
-	horns = ~horn.value(500,1,EnvGen.ar(envHorn,doneAction:2));
+	horns = ~horn.value(500,1,EnvGen.ar(envHorn));
 	engine = ~engine.value(12,2);
-	output = Mix.ar([engine, horns]);
+	crash = ~hit.value(3,0.5);
+	output = Mix.ar([engine, horns,crash]);
 	Out.ar(0,Pan2.ar(output));
 }).add;
 
@@ -50,8 +51,6 @@ SynthDef(\carro,{
 	output = Mix.ar([horns,engine]);
 	Pan2.ar(output)
 };
-
-
 )
 
 
@@ -69,6 +68,8 @@ o = OSCFunc({ arg msg, time;
 o.free;
 
 */
+
+({~hit.value(0.1,0.7)}.play)
 
 ({~brake.value}.play)
 Synth(\carro, [\tmjmp, 0.1  ,\tmshort, 0.05 , \tmhold, 0.5 ,\wtm, 0.5 ] );
