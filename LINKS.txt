@@ -1,2 +1,11 @@
 (supercollider) MIDIout: https://doc.sccode.org/Classes/MIDIOut.html
-(scd & processing): https://discourse.processing.org/t/processing-3-supercollider-interaction/10432
+(scd & processing): 
+	https://discourse.processing.org/t/processing-3-supercollider-interaction/10432
+	http://www.kimri.org/blog/?p=721
+	https://funprogramming.org/138-Processing-talks-to-SuperCollider-via-OSC.html
+	http://sccode.org/1-4UL
+	https://doc.sccode.org/Classes/NetAddr.html
+	https://doc.sccode.org/Classes/OSCFunc.html
+	https://doc.sccode.org/Guides/OSC_communication.html
+
+	
