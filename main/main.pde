@@ -1,7 +1,17 @@
+import oscP5.*;
+import netP5.*;
+
+OscP5 oscP5;
+NetAddress myRemoteLocation;
+
 Patricio patrick;
 Bob bob;
 Bus bus;
 PImage bg;
+
+int flag1 = 0;
+int flag2 = 0;
+int flag3 = 0;
 
 void setup(){
   size(736,476, P2D);
@@ -10,10 +20,12 @@ void setup(){
   bob = new Bob(-50,height*3/4);
   patrick.setLimit(width*1/4);
   bob.setLimit(width*1/8);
-  bus = new Bus(width, height*3/5, 9);
+  bus = new Bus(width, height*3/5, 5);
   frameRate(27);
+  oscP5 = new OscP5(this,8080);
+  myRemoteLocation = new NetAddress("127.0.0.1",8080);
 }
-
+/*
 void draw(){
   image(bg,0,0);
   if(keyPressed){
@@ -30,6 +42,37 @@ void draw(){
   bob.update();
   patrick.update();
   bus.update();
+}
+*/
+void draw(){
+  image(bg,0,0);
+  if(flag1 == 1){
+    animation1();
+    flag1 = 0;
+  }
+  if(flag3 == 1){
+    animation3();
+    flag3 = 0;
+  }
+  if(flag2 == 1){
+    animation2();
+    flag2 = 0;
+  }
+  bob.update();
+  patrick.update();
+  bus.update();
+}
+
+
+void oscEvent(OscMessage theOscMessage) {
+  if(theOscMessage.checkAddrPattern("/test")==true) {
+      flag1 = theOscMessage.get(0).intValue();  
+      flag2 = theOscMessage.get(1).intValue();
+      flag3 = theOscMessage.get(2).intValue();
+      println(flag1, " ", flag2, " ", flag3);
+  } else {
+    println("received unrecognized osc message");
+  }
 }
 
 void animation1(){
