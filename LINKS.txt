@@ -8,4 +8,13 @@
 	https://doc.sccode.org/Classes/OSCFunc.html
 	https://doc.sccode.org/Guides/OSC_communication.html
 
+MIDIBUS:
+	http://www.smallbutdigital.com/docs/themidibus/themidibus/MidiBus.html#addMidiListener(themidibus.MidiListener)
+	https://www.youtube.com/watch?v=ih2uqOaqb4c
+	https://composerprogrammer.com/teaching/supercollider/sctutorial/7.1%20Interaction%202.html
+   Maybe:	
+	https://theseanco.github.io/howto_co34pt_liveCode/4-7-MIDI/
+
+SYNTHTOMIDI:
+	https://gist.github.com/catfact/66d23dd48c0b1a3cace3c671c9755a42
 	
