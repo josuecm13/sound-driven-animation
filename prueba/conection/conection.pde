@@ -19,7 +19,7 @@ void setup() {
 }
 
 void draw() {
-  background(red, green, blue);
+  background(red * 255, green * 255, blue * 255);
 }
 
 void oscEvent(OscMessage theOscMessage) {

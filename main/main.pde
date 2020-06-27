@@ -69,7 +69,13 @@ void oscEvent(OscMessage theOscMessage) {
       flag1 = theOscMessage.get(0).intValue();  
       flag2 = theOscMessage.get(1).intValue();
       flag3 = theOscMessage.get(2).intValue();
-      println(flag1, " ", flag2, " ", flag3);
+      if(flag1 == 1){
+        animation1();
+      }else if(flag2 == 1){
+        animation2();
+      }else if(flag3 == 1){
+        animation3();
+      }
   } else {
     println("received unrecognized osc message");
   }

@@ -31,7 +31,7 @@ SONIDO DEL CARRO:
 };
 
 SynthDef(\carro,{
-	arg tmjmp = 0.1, tmshort = 0.54, tmhold = 1.3, wtm = 2;
+	arg tmjmp = 0.05, tmshort = 0.05, tmhold = 0.4, wtm = 0.5;
 	var engine, brake, horns, envHorn, output, crash;
 	envHorn = Env.new([0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0],
 		[wtm,tmjmp,tmhold,tmjmp,tmhold * 0.5,tmjmp,tmshort,tmjmp,tmshort,tmjmp,tmshort,tmjmp,tmshort,tmjmp,tmshort,tmjmp,tmshort,tmjmp,tmhold,tmshort]);
@@ -56,22 +56,13 @@ SynthDef(\carro,{
 
 ({~car.value()}.play)
 
-/*
-~host = NetAddr("localhost", 4859); // address de PROCESSING
+
+Synth(\carro, [\tmjmp, 0.03 ,\tmshort, 0.05 ,\tmhold, 0.7 ,\wtm, 0.5]);
 
 
-o = OSCFunc({ arg msg, time;
-	[time, msg].postln;
-	~host.sendMsg("/trigger",42,12.34,"hello processing");
-},'/tr', s.addr);
-
-o.free;
-
-*/
 
 ({~hit.value(0.1,0.7)}.play)
 
 ({~brake.value}.play)
-Synth(\carro, [\tmjmp, 0.1  ,\tmshort, 0.05 , \tmhold, 0.5 ,\wtm, 0.5 ] );
 
 
