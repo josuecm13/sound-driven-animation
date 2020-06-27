@@ -20,7 +20,7 @@ void setup(){
   bob = new Bob(-50,height*3/4);
   patrick.setLimit(width*1/4);
   bob.setLimit(width*1/8);
-  bus = new Bus(width, height*3/5, 5);
+  bus = new Bus(width, height*3/5, 15);
   frameRate(27);
   oscP5 = new OscP5(this,8080);
   myRemoteLocation = new NetAddress("127.0.0.1",8080);
